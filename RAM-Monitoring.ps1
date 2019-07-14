@@ -85,6 +85,7 @@ function MainFlowFunction {
             else {
                 # Condition not met, RAM is high send email
                 sendEmailFunction;
+                # Email Sent
                 break;
             }
 
@@ -93,7 +94,7 @@ function MainFlowFunction {
     # MAIN FLOW HERE:
     
     # Get Email Credentialsclear
-    Write-Output "Enter the credentials of the GMAIL account you will like to use to send email, after RAM usage goes over (Default 80%)";
+    Write-Output "Enter the credentials of the GMAIL account you will like to use to send email, after RAM usage goes over";
     $emailCreds = Get-Credential;
 
     MonitorRAMFunction;
@@ -122,3 +123,6 @@ Clear-Host;
 
 # Invoke Command in Remote Session (ramUsageFunction)
 Invoke-Command -Session $remoteSession -ScriptBlock ${Function:MainFlowFunction};
+
+# Close session
+Remove-PSSession $remoteSession;
