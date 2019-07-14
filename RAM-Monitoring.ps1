@@ -1,3 +1,15 @@
+# Questions? Let me know what you think: aglamadrid19@gmail.com
+
+# I'm merging fixes, send me a pull request.
+
+# Thank you for taking the time to go over the Script
+
+# 1 - The Script will capture Remote Computer Username and Password, then it would capture the Remote Computer IP, then it will try to connect
+# 2 - If connection successful, it will capture the Username and Password for the SMTP server you will like to use to send the report email
+# 3 - After that it will enter in a While Loop, if the ramUsageFunction ever returns a value higher than your loop condition, it will trigger the sendEmailFunction
+
+# 4 - The sendEmailFunction will then capture the process/ram usage and send it over in an email (credentials capture in step 2) as HTML.
+
 # Assumntions:
 # We will be using WinRM to remote into the machine we want to monitor
 # I'm not joined to a domain, so I added the machine I want to monitor to my Trusted Hosts
@@ -15,14 +27,17 @@ function MainFlowFunction {
         return [int]$ramUsagePercent;
     }
 
-    # gaywlzghlpnvscno
     function sendEmailFunction {
         # Get Server / Computer Name
         $serveName = $env:COMPUTERNAME;
 
         # Setting the email that will be sent
-        $From = "aglamadrid19@gmail.com";
-        $To = "aglamadrid19@gmail.com";
+
+        # Set the email from
+        $From = ""; 
+
+        # Set the email to
+        $To = "";
 
         #######
         # We might need this in the future
@@ -68,15 +83,12 @@ function MainFlowFunction {
                 continue;
             }
             else {
-                Write-Output "RAM is higher that the limit you used, send Report Email";
-                $ramUsagePercentPublic;
+                # Condition not met, RAM is high send email
+                sendEmailFunction;
                 break;
             }
 
         };
-
-        # After loop break execute sendMailFunction
-        sendEmailFunction;
     };
     # MAIN FLOW HERE:
     
