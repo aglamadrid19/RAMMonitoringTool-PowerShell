@@ -1,4 +1,4 @@
-# RAMMonitoringTool
+# RAMMonitoringTool-PowerShell
 ## Recieve an email if one of your Servers' RAM usage goes over a set value(%)
 ## I'm merging fixes, send me a pull request.
 PowerShell Script to monitor RAM usage in Remote Computer.
